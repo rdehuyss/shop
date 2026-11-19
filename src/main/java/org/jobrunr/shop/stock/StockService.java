@@ -1,14 +1,18 @@
 package org.jobrunr.shop.stock;
 
-import org.springframework.scheduling.annotation.Scheduled;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StockService {
+public class StockService implements Job {
 
-    @Scheduled(cron = "0 0 * * * *")
-    //@Recurring(id = "sync-stock", cron = "0 * * * *")
     public void syncStock() {
         System.out.println("Syncing stock every hour");
+    }
+
+    @Override
+    public void execute(JobExecutionContext context) {
+        syncStock();
     }
 }
