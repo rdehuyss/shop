@@ -19,10 +19,6 @@ public class OrderService {
         // todo: process the order
     }
 
-    public void sendDiscountEmail(UUID orderId) {
-        System.out.println("Sending discount email: " + orderId);
-    }
-
     protected void createOrderPickingInstruction(UUID orderId, JobContext jobContext) {
         System.out.println("creating-order: " + orderId);
     }
@@ -33,5 +29,9 @@ public class OrderService {
 
     protected void createAndSendInvoice(UUID orderId, JobContext jobContext) {
         System.out.println("sending-invoice: " + orderId);
+    }
+
+    protected void sendDiscountEmail(UUID orderId) {
+        System.out.println("Sending discount email: " + orderId);
     }
 }

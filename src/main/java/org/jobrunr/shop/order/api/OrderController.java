@@ -22,7 +22,7 @@ public class OrderController {
     }
 
     @GetMapping("/add-to-order")
-    public Order processOrder(@RequestParam(required = false) UUID orderId, @RequestParam String product) {
+    public Order addToOrder(@RequestParam(required = false) UUID orderId, @RequestParam String product) {
         Order order = getOrder(orderId);
         order.addItem(product);
         orderRepository.save(order);
