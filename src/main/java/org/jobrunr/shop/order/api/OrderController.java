@@ -1,9 +1,6 @@
 package org.jobrunr.shop.order.api;
 
-import org.jobrunr.jobs.JobId;
-import org.jobrunr.jobs.context.JobContext;
 import org.jobrunr.scheduling.JobScheduler;
-import org.jobrunr.shop.order.OrderService;
 import org.jobrunr.shop.order.model.Order;
 import org.jobrunr.shop.order.repo.OrderRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +31,8 @@ public class OrderController {
 
     @GetMapping("/confirm-order")
     public String confirmOrder(UUID orderId) {
-        JobId jobId = jobScheduler.<OrderService>enqueue(o -> o.processOrder(orderId, JobContext.Null));
-        return "Order confirmed: " + jobId.asUUID();
+        // todo: confirm order
+        return "Order confirmed: " + orderId;
     }
 
     private Order getOrder(UUID orderId) {

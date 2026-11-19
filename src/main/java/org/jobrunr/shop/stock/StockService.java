@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 public class StockService {
 
     @Scheduled(cron = "0 0 * * * *")
-    //@Recurring(id = "sync-stock", cron = "0 * * * *")
     public void syncStock() {
         System.out.println("Syncing stock every hour");
     }

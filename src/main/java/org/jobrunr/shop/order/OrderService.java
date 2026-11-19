@@ -4,8 +4,6 @@ import org.jobrunr.jobs.context.JobContext;
 import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Service
@@ -18,11 +16,7 @@ public class OrderService {
     }
 
     public void processOrder(UUID orderId, JobContext jobContext) {
-        jobContext.runStepOnce("order-picking", () -> createOrderPickingInstruction(orderId, jobContext));
-        jobContext.runStepOnce("order-confirmation", () -> sendOrderConfirmation(orderId, jobContext));
-        jobContext.runStepOnce("invoice", () -> createAndSendInvoice(orderId, jobContext));
-        
-        jobScheduler.schedule(Instant.now().plus(36, ChronoUnit.HOURS), () -> sendDiscountEmail(orderId));
+        // todo: process the order
     }
 
     public void sendDiscountEmail(UUID orderId) {
@@ -34,7 +28,6 @@ public class OrderService {
     }
 
     protected void sendOrderConfirmation(UUID orderId, JobContext jobContext) {
-        if (jobContext.currentRetry() < 3) throw new IllegalStateException("Mail Server is down");
         System.out.println("sending-order-confirmation: " + orderId);
     }
 
