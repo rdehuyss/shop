@@ -1,0 +1,20 @@
+
+### 1. Create order with Pokemon card
+GET http://localhost:8080/add-to-order?product=Pokemon%20card
+Accept: application/json
+
+> {%
+    const body = typeof response.body === "string"
+        ? JSON.parse(response.body)
+        : response.body;
+    client.global.set("orderId", body.id);
+%}
+
+### 2. Add Pokemon board
+GET http://localhost:8080/add-to-order?orderId={{orderId}}&product=Pokemon%20board
+Accept: application/json
+
+
+### 3. Process order
+GET http://localhost:8080/confirm-order?orderId={{orderId}}
+Accept: application/json
